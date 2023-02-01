@@ -21,7 +21,7 @@ answers = SPREADSHEET.worksheet('answers')
 topic1 = questions.get_all_values()
 # get_answers = answers.get_all_values()
 
-#loop through values returned and create dictionary
+# loop through values returned and create dictionary
 questions = {}
 for select in topic1:
     question = select[0]
@@ -29,8 +29,12 @@ for select in topic1:
     questions[question] = answers
 
 
-#creates quiz
+# creates quiz
 def get_questions():
+    """
+    Loops through questions dictionary and displays the keys enumerated and the values sorted
+    """
+
     for num, (q, a) in enumerate(questions.items(), start=1):
         print(f"\n{num}: {q}")
         correct_answer = a[0]
@@ -46,7 +50,42 @@ def get_questions():
             print('Wrong')        
 
 
-get_questions()
+def start_game():
+    """
+    The function will start a new quiz displaying the rules, asking for a username (and displaying topics)
+    """
+
+    print(f"\n Welcome to The History Quiz")
+
+    print(f"\n Do you want to start a new quiz?")
+
+    confirm()
+
+
+def confirm():
+    """
+    Confirms if the answer is valid
+    """
+    while True:
+        yes_no = input(f"\n Y / N: ")
+
+        if yes_no not in ("Y", "N"):
+            print(f'Please try again')
+        elif yes_no == "Y":
+            get_questions()
+        else:
+            break
+
+
+def main():
+    """
+    Runs the main program
+    """
+    start_game()
+
+    print('goodnight')
+
+main()
 
 # question_num = 1
 # for question in question_list:
