@@ -57,10 +57,36 @@ def start_game():
 
     print(f"\n Welcome to The History Quiz")
 
+    get_username()
+
     print(f"\n Do you want to start a new quiz?")
 
     confirm()
 
+
+def get_username():
+    """
+    Gets username for user
+    """
+    while True:
+        username = input("Please choose a username: ").strip()
+
+        if username == '':
+            print(f"Username must not be empty")
+        elif not len(username) > 2:
+            print("Your username must contain at least 3 characters")
+        else:
+            print(f"Hi {username}!")
+            break
+
+
+
+        #try:
+        #     if len(username) > 2:
+        #         print(f"Hi {username}!")
+        #         break
+        # except TypeError:
+        #     print("Your username must contain at least 3 characters")
 
 def confirm():
     """
