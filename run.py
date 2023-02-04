@@ -27,6 +27,8 @@ for select in topic1:
     question = select[0]
     answers = select[1:]
     questions[question] = answers
+    
+user_score = []
 
 
 # creates quiz
@@ -34,7 +36,7 @@ def get_questions():
     """
     Loops through questions dictionary and displays the keys enumerated and the values sorted
     """
-
+    score = 0
     for num, (q, a) in enumerate(questions.items(), start=1):
         print(f"\n{num}: {q}")
         correct_answer = a[0]
@@ -44,10 +46,11 @@ def get_questions():
 
         a_label = input(f'\n Your answer: ').upper()
         answer = sort_label[a_label]
-        if answer == correct_answer:
-            print('Correct')
+        if answer == correct_answer:        #create stand-alone function for checking score
+            score += 1
+            print('You got the answer right')
         else:
-            print('Wrong')        
+            print(f'Sorry, the correct answer is {correct_answer}')        
 
 
 def start_game():
@@ -57,11 +60,11 @@ def start_game():
 
     print(f"\n Welcome to The History Quiz")
 
-    get_username()
+    # get_username()
 
     print(f"\n Do you want to start a new quiz?")
 
-    confirm()
+    get_questions()
 
 
 def get_username():
@@ -88,26 +91,41 @@ def get_username():
         # except TypeError:
         #     print("Your username must contain at least 3 characters")
 
-def confirm():
-    """
-    Confirms if the answer is valid
-    """
+# def confirm():
+#     """
+#     Confirms if the answer is valid
+#     """
+#     while True:
+#         yes_no = input(f"\n Y / N: ").upper()
+
+#         if yes_no not in ("Y", "N"):
+#             print(f'Please try again')
+#         elif yes_no == "Y":
+#             get_questions()
+#         else:
+#             break
+
+
+def replay():
     while True:
-        yes_no = input(f"\n Y / N: ")
+        yes_no = input(f"\n Would you like to play again?\n Y / N: ").upper()
 
         if yes_no not in ("Y", "N"):
             print(f'Please try again')
         elif yes_no == "Y":
-            get_questions()
+            return True
         else:
-            break
-
+            return False
 
 def main():
     """
     Runs the main program
     """
+    get_username()
     start_game()
+    
+    while replay():
+        start_game()
 
     print('goodnight')
 
