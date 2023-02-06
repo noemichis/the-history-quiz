@@ -1,6 +1,7 @@
 import gspread
 from google.oauth2.service_account import Credentials
 import string
+import random
 
 
 SCOPE = [
@@ -39,7 +40,7 @@ def get_questions():
     for num, (q, a) in enumerate(questions.items(), start=1):
         print(f"\n{num}: {q}")
         correct_answer = a[0]
-        sort_label = dict(zip(string.ascii_uppercase, sorted(a)))
+        sort_label = dict(zip(string.ascii_uppercase, random.sample(a, k=len(a))))
         for label, a in sort_label.items():
             print(f" {label}. {a}")
 # create stand-alone function for checking score
@@ -51,39 +52,10 @@ def get_questions():
         else:
             print(f"Sorry, the correct answer is {correct_answer}")
 
+    print(f"\nYou got {score} out of {num} questions")        
+    data = username, score
+    update_worksheet(data, 'leaderboard')
     return score
-
-
-def start_game():
-    """
-    The function will start a new quiz displaying the rules, asking
-    for a username (and displaying topics)
-    """
-
-    print("\n Welcome to The History Quiz")
-
-    # get_username()
-
-    print("\n Do you want to start a new quiz?")
-
-    # get_questions()
-
-
-def get_username():
-    """
-    Gets username for user
-    """
-    while True:
-        username = input("Please choose a username: ").strip()
-
-        if username == '':
-            print("Username must not be empty")
-        elif not len(username) > 2:
-            print("Your username must contain at least 3 characters")
-        else:
-            print(f"Hi {username}!")
-            break
-    return username
 
 
 def update_worksheet(data, worksheet):
@@ -112,20 +84,38 @@ def main():
     """
     Runs the main program
     """
-    username = get_username()
-    start_game()
-    score = get_questions()
-    data = username, score
-    user_score = [i for i in data]
-    update_worksheet(user_score, 'leaderboard')
+    # username = get_username()
+    get_questions()
+    # score = get_questions()
+    # data = username, score
+    # user_score = [i for i in data]
+    # update_worksheet(user_score, 'leaderboard')
 
     while replay():
-        start_game()
+        get_questions()
 
     print('goodnight')
 
 
-main()
+# main()
+
+if __name__ == '__main__':
+    print("\n Welcome to The History Quiz\n")
+    print("Please enter your name to start the game:")
+    while True:
+        username = input("\n").strip()
+
+        if username == '':
+            print("Username must not be empty")
+        elif not len(username) > 2:
+            print("Your username must contain at least 3 characters")
+        else:
+            break
+    print(f"\n Hi {username}!\n")
+    input("\n Press a key to start a new quiz\n")  
+        
+    main()    
+
 
 # question_num = 1
 # for question in question_list:
