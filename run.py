@@ -2,6 +2,7 @@ import gspread
 from google.oauth2.service_account import Credentials
 import string
 import random
+from tabulate import tabulate
 
 
 SCOPE = [
@@ -68,6 +69,18 @@ def update_worksheet(data, worksheet):
     print(f"{worksheet} worksheet updated successfully.\n")
 
 
+def display_leaderboard():
+    """
+    Displays the top 10 from the leaderboard on choice of the user
+    """
+    l_board = SPREADSHEET.worksheet('leaderboard')
+    top_10 = l_board.get_all_values()
+    
+    top_10.sort(reverse=True)
+    board = tabulate(top_10[:10], headers=['Player', 'HighScore'], tablefmt="outline")
+    print(board)
+
+
 def replay():
     while True:
         yes_no = input("\n Would you like to play again?\n Y / N: ").upper()
@@ -91,13 +104,12 @@ def main():
     # user_score = [i for i in data]
     # update_worksheet(user_score, 'leaderboard')
 
+    display_leaderboard()
     while replay():
         get_questions()
 
     print('goodnight')
 
-
-# main()
 
 if __name__ == '__main__':
     print("\n Welcome to The History Quiz\n")
@@ -112,9 +124,9 @@ if __name__ == '__main__':
         else:
             break
     print(f"\n Hi {username}!\n")
-    input("\n Press a key to start a new quiz\n")  
-        
-    main()    
+    input("\n Press a key to start a new quiz\n")
+
+    main()
 
 
 # question_num = 1
