@@ -82,13 +82,16 @@ def display_leaderboard():
 
 
 def replay():
+    """
+    Function to prompt user about their next action.
+    """
     while True:
-        yes_no = input("\n Would you like to play again?\n Y / N: ").upper()
+        user_choice = input("\n Please choose an option:\nA. Check Leaderboard\nB. Play Again\nC. Quit\n").lower()
 
-        if yes_no not in ("Y", "N"):
-            print("Please try again")
-        elif yes_no == "Y":
-            return True
+        if user_choice == 'a':
+            display_leaderboard()
+        elif user_choice == "b":
+            get_questions()
         else:
             return False
 
@@ -104,9 +107,7 @@ def main():
     # user_score = [i for i in data]
     # update_worksheet(user_score, 'leaderboard')
 
-    display_leaderboard()
-    while replay():
-        get_questions()
+    replay()
 
     print('goodnight')
 
