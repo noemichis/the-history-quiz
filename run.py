@@ -74,9 +74,8 @@ def display_leaderboard():
     Displays the top 10 from the leaderboard on choice of the user
     """
     l_board = SPREADSHEET.worksheet('leaderboard')
-    top_10 = l_board.get_all_values()
-    
-    top_10.sort(reverse=True)
+    data = l_board.get_all_values()
+    top_10 = sorted(data, key=lambda x: x[1], reverse=True)
     board = tabulate(top_10[:10], headers=['Player', 'HighScore'], tablefmt="outline")
     print(board)
 
