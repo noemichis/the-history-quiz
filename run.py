@@ -3,6 +3,7 @@ from google.oauth2.service_account import Credentials
 import string
 import random
 from tabulate import tabulate
+import game_art
 
 
 SCOPE = [
@@ -17,7 +18,7 @@ GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SPREADSHEET = GSPREAD_CLIENT.open('the_history_quiz')
 
 questions = SPREADSHEET.worksheet('questions')
-answers = SPREADSHEET.worksheet('answers')
+l_board = SPREADSHEET.worksheet('leaderboard')
 
 
 topic1 = questions.get_all_values()
@@ -73,7 +74,7 @@ def display_leaderboard():
     """
     Displays the top 10 from the leaderboard on choice of the user
     """
-    l_board = SPREADSHEET.worksheet('leaderboard')
+    
     data = l_board.get_all_values()
     top_10 = sorted(data, key=lambda x: x[1], reverse=True)
     board = tabulate(top_10[:10], headers=['Player', 'HighScore'], tablefmt="outline")
@@ -112,6 +113,7 @@ def main():
 
 
 if __name__ == '__main__':
+    print(game_art.GAME_LOGO)
     print("\n Welcome to The History Quiz\n")
     print("Please enter your name to start the game:")
     while True:
