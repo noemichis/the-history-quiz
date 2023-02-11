@@ -48,16 +48,25 @@ def get_questions():
 # create stand-alone function for checking score
         a_label = input('\n Your answer: ').upper()
         answer = sort_label[a_label]
-        if answer == correct_answer:
-            score += 1
-            print("You got the answer right")
-        else:
-            print(f"Sorry, the correct answer is {correct_answer}")
+        score += validate_answer(correct_answer, answer)
 
     print(f"\nYou got {score} out of {num} questions")        
     data = username, score
     update_worksheet(data, 'leaderboard')
     return score
+
+
+def validate_answer(correct_answer, answer):
+    """
+    Checks if users answer is the correct one, 
+    if it is returns 1.
+    """
+    if answer == correct_answer:
+        print("That's right!")
+        return 1
+    else:
+        print(f"Sorry, the correct answer is {correct_answer}")
+        return 0
 
 
 def update_worksheet(data, worksheet):
