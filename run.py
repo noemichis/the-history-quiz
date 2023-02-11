@@ -105,9 +105,11 @@ def display_leaderboard():
     Displays the top 10 from the leaderboard on choice of the user
     """
     data = l_board.get_all_values()
-    top_10 = sorted(data, key=lambda x: x[1], reverse=True)
-    board = tabulate(top_10[:10], headers=['Player', 'HighScore'], tablefmt="outline")
-    print(board)
+    top_10 = sorted(data, key=lambda x: int(x[1]), reverse=True)
+    headers = ['Player', 'HighScore']
+    board = tabulate(top_10[:10], headers, tablefmt="outline")
+    print(game_art.LEADER_BOARD)
+    print(f"{board}")
 
 
 def replay():
