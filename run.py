@@ -22,7 +22,6 @@ l_board = SPREADSHEET.worksheet('leaderboard')
 
 
 topic1 = questions.get_all_values()
-# get_answers = answers.get_all_values()
 
 # loop through values returned and create dictionary
 questions = {}
@@ -36,7 +35,7 @@ for select in topic1:
 def get_questions():
     """
     Loops through questions dictionary and displays the keys enumerated
-    and the values sorted
+    and the answers sorted randomly
     """
     score = 0
     for num, (q, a) in enumerate(questions.items(), start=1):
@@ -49,16 +48,12 @@ def get_questions():
         a_label = input('\n Your answer: ').upper()
         answer = sort_label[a_label]
         score += validate_answer(correct_answer, answer)
-
-    print(f"\nYou got {score} out of {num} questions")        
-    data = username, score
-    update_worksheet(data, 'leaderboard')
-    return score
+    show_score(score, len(questions))
 
 
 def validate_answer(correct_answer, answer):
     """
-    Checks if users answer is the correct one, 
+    Checks if users answer is the correct one,
     if it is returns 1.
     """
     if answer == correct_answer:
@@ -67,6 +62,15 @@ def validate_answer(correct_answer, answer):
     else:
         print(f"Sorry, the correct answer is {correct_answer}")
         return 0
+
+
+def show_score(score, num):
+    """
+    Shows final score to the user
+    """
+    print(f"\nYou got {score} out of {num} questions")
+    data = username, score
+    update_worksheet(data, 'leaderboard')
 
 
 def update_worksheet(data, worksheet):
@@ -83,7 +87,6 @@ def display_leaderboard():
     """
     Displays the top 10 from the leaderboard on choice of the user
     """
-    
     data = l_board.get_all_values()
     top_10 = sorted(data, key=lambda x: x[1], reverse=True)
     board = tabulate(top_10[:10], headers=['Player', 'HighScore'], tablefmt="outline")
@@ -96,7 +99,6 @@ def replay():
     """
     while True:
         user_choice = input("\n Please choose an option:\nA. Check Leaderboard\nB. Play Again\nC. Quit\n").lower()
-
         if user_choice == 'a':
             display_leaderboard()
         elif user_choice == "b":
@@ -109,16 +111,9 @@ def main():
     """
     Runs the main program
     """
-    # username = get_username()
     get_questions()
-    # score = get_questions()
-    # data = username, score
-    # user_score = [i for i in data]
-    # update_worksheet(user_score, 'leaderboard')
-
     replay()
-
-    print('goodnight')
+    print('GoodBye')
 
 
 if __name__ == '__main__':
@@ -127,7 +122,6 @@ if __name__ == '__main__':
     print("Please enter your name to start the game:")
     while True:
         username = input("\n").strip()
-
         if username == '':
             print("Username must not be empty")
         elif not len(username) > 2:
