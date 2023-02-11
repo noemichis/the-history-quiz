@@ -44,13 +44,32 @@ def get_questions():
         random_label = dict(zip(string.ascii_uppercase, random.sample(option, k=len(option))))
         for label, option in random_label.items():
             print(f" {label}. {option}")
-        choice = input('\n Your answer: ').upper()
+        while True:
+            choice = input('\n Your answer: ').upper()
+            if validate_answer(choice):
+                break
+        # add validation for choice, valid options a,b,c,d.
+        # Possibly move to new game() function,
+        # keep get_questions separate.
         answer = random_label[choice]
-        score += validate_answer(correct_answer, answer)
+        score += check_answer(correct_answer, answer)
     show_score(score, len(questions))
 
 
-def validate_answer(correct_answer, answer):
+def validate_answer(choice):
+    """
+    Validates users answer input and returns
+    error if not in A, B, C, D
+    """
+    if choice not in ('A', 'B', 'C', 'D'):
+        print(
+            "The valid options are A,B,C,D, please try again."
+        )
+        return False
+    return True
+
+
+def check_answer(correct_answer, answer):
     """
     Checks if users answer is the correct one,
     if it is returns 1.
@@ -58,9 +77,8 @@ def validate_answer(correct_answer, answer):
     if answer == correct_answer:
         print("That's right!")
         return 1
-    else:
-        print(f"Sorry, the correct answer is {correct_answer}")
-        return 0
+    print(f"Sorry, the correct answer is {correct_answer}")
+    return 0
 
 
 def show_score(score, num):
