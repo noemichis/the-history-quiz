@@ -38,15 +38,14 @@ def get_questions():
     and the answers sorted randomly
     """
     score = 0
-    for num, (q, a) in enumerate(questions.items(), start=1):
-        print(f"\n{num}: {q}")
-        correct_answer = a[0]
-        sort_label = dict(zip(string.ascii_uppercase, random.sample(a, k=len(a))))
-        for label, a in sort_label.items():
-            print(f" {label}. {a}")
-# create stand-alone function for checking score
-        a_label = input('\n Your answer: ').upper()
-        answer = sort_label[a_label]
+    for num, (prompt, option) in enumerate(questions.items(), start=1):
+        print(f"\n{num}: {prompt}")
+        correct_answer = option[0]
+        random_label = dict(zip(string.ascii_uppercase, random.sample(option, k=len(option))))
+        for label, option in random_label.items():
+            print(f" {label}. {option}")
+        choice = input('\n Your answer: ').upper()
+        answer = random_label[choice]
         score += validate_answer(correct_answer, answer)
     show_score(score, len(questions))
 
@@ -77,10 +76,10 @@ def update_worksheet(data, worksheet):
     """
     Push username and score to the leaderboard worksheet
     """
-    print(f"Updating {worksheet} worksheet...\n")
+    print(f"Updating {worksheet}...\n")
     worksheet_to_update = SPREADSHEET.worksheet(worksheet)
     worksheet_to_update.append_row(data)
-    print(f"{worksheet} worksheet updated successfully.\n")
+    print(f"{worksheet} updated successfully.\n")
 
 
 def display_leaderboard():
