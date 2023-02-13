@@ -17,22 +17,58 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SPREADSHEET = GSPREAD_CLIENT.open('the_history_quiz')
 
-questions = SPREADSHEET.worksheet('questions')
+TOPIC_1 = SPREADSHEET.worksheet('questions')
+TOPIC_2 = SPREADSHEET.worksheet('topic2')
 l_board = SPREADSHEET.worksheet('leaderboard')
 
 
-topic1 = questions.get_all_values()
+def question_dict(selection):
+    """
+    Loops through values returned and create dictionary
+    """
+    topic = selection.get_all_values()
+    questions = {}
+    for select in topic:
+        question = select[0]
+        answers = select[1:]
+        questions[question] = answers
+    return questions
 
-# loop through values returned and create dictionary
-questions = {}
-for select in topic1:
-    question = select[0]
-    answers = select[1:]
-    questions[question] = answers
+
+def validate_answer(values):
+    """
+    Validates users answer input and returns
+    error if not in A, B, C, D
+    """
+    if values not in ('A', 'B', 'C', 'D'):
+        print(
+            "The valid options are A,B,C,D, please try again."
+        )
+        return False
+    return True
+
+
+def choose_topic():
+    """
+    Allows user to select the topic they wish to play
+    """
+    print('\nChoose a topic to start the game:')
+    while True:
+        selection = input("\nA. The Vikings\nB. The Romans\n").upper()
+        if validate_answer(selection):
+            break
+    print("Great! Let's begin.")
+    if selection == 'A':
+        print('the Vikings')
+        questions = question_dict(TOPIC_1)
+    elif selection == 'B':
+        print('the romans')
+        questions = question_dict(TOPIC_2)
+    get_questions(questions)
 
 
 # creates quiz
-def get_questions():
+def get_questions(questions):
     """
     Loops through questions dictionary and displays the keys enumerated
     and the answers sorted randomly
@@ -45,7 +81,7 @@ def get_questions():
         for label, option in random_label.items():
             print(f" {label}. {option}")
         while True:
-            choice = input('\n Your answer: ').upper()
+            choice = input('\nYour answer: ').upper()
             if validate_answer(choice):
                 break
         # add validation for choice, valid options a,b,c,d.
@@ -54,19 +90,6 @@ def get_questions():
         answer = random_label[choice]
         score += check_answer(correct_answer, answer)
     show_score(score, len(questions))
-
-
-def validate_answer(choice):
-    """
-    Validates users answer input and returns
-    error if not in A, B, C, D
-    """
-    if choice not in ('A', 'B', 'C', 'D'):
-        print(
-            "The valid options are A,B,C,D, please try again."
-        )
-        return False
-    return True
 
 
 def check_answer(correct_answer, answer):
@@ -117,11 +140,11 @@ def replay():
     Function to prompt user about their next action.
     """
     while True:
-        user_choice = input("\n Please choose an option:\nA. Check Leaderboard\nB. Play Again\nC. Quit\n").lower()
+        user_choice = input("\nPlease choose an option:\nA. Check Leaderboard\nB. Play Again\nC. Quit\n").lower()
         if user_choice == 'a':
             display_leaderboard()
         elif user_choice == "b":
-            get_questions()
+            choose_topic()
         else:
             return False
 
@@ -130,15 +153,15 @@ def main():
     """
     Runs the main program
     """
-    get_questions()
+    choose_topic()
     replay()
     print('GoodBye')
 
 
 if __name__ == '__main__':
     print(game_art.GAME_LOGO)
-    print("\n Welcome to The History Quiz\n")
-    print("Please enter your name to start the game:")
+    print("\nWelcome to The History Quiz")
+    print("\nPlease enter your name to start the game:")
     while True:
         username = input("\n").strip()
         if username == '':
@@ -147,23 +170,22 @@ if __name__ == '__main__':
             print("Your username must contain at least 3 characters")
         else:
             break
-    print(f"\n Hi {username}!\n")
-    input("\n Press a key to start a new quiz\n")
+    print(f"\nHi {username}!\n")
 
     main()
 
 
-# question_num = 1
-# for question in question_list:
-#     print(question)
-#     for answer in get_answers[question_num-1]:
-#         print(answer)
+# # question_num = 1
+# # for question in question_list:
+# #     print(question)
+# #     for answer in get_answers[question_num-1]:
+# #         print(answer)
 
-#     question_num += 1
+# #     question_num += 1
 
-# try:
-#     if len(username) > 2:
-#         print(f"Hi {username}!")
-#         break
-# except TypeError:
-# print("Your username must contain at least 3 characters")
+# # try:
+# #     if len(username) > 2:
+# #         print(f"Hi {username}!")
+# #         break
+# # except TypeError:
+# # print("Your username must contain at least 3 characters")
