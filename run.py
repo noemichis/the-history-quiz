@@ -12,14 +12,14 @@ SCOPE = [
     "https://www.googleapis.com/auth/drive"
     ]
 
-CREDS = Credentials.from_service_account_file('creds.json')
+CREDS = Credentials.from_service_account_file("creds.json")
 SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
-SPREADSHEET = GSPREAD_CLIENT.open('the_history_quiz')
+SPREADSHEET = GSPREAD_CLIENT.open("the_history_quiz")
 
-TOPIC_1 = SPREADSHEET.worksheet('questions')
-TOPIC_2 = SPREADSHEET.worksheet('topic2')
-l_board = SPREADSHEET.worksheet('leaderboard')
+TOPIC_1 = SPREADSHEET.worksheet("topic1")
+TOPIC_2 = SPREADSHEET.worksheet("topic2")
+l_board = SPREADSHEET.worksheet("leaderboard")
 
 
 def question_dict(selection):
@@ -40,9 +40,9 @@ def validate_answer(values):
     Validates users answer input and returns
     error if not in A, B, C, D
     """
-    if values not in ('A', 'B', 'C', 'D'):
+    if values not in ("A", "B", "C", "D"):
         print(
-            "The valid options are A,B,C,D, please try again."
+            "The valid options are A,B,C,D, try again."
         )
         return False
     return True
@@ -52,23 +52,24 @@ def choose_topic():
     """
     Allows user to select the topic they wish to play
     """
-    print('\nChoose a topic to start the game:')
+    print("\nChoose a topic to start the game:")
     while True:
         selection = input("\nA. The Vikings\nB. The Romans\n").upper()
         if validate_answer(selection):
             break
     print("Great! Let's begin.")
-    if selection == 'A':
+    # separate to return_questions 
+    if selection == "A":
         print('the Vikings')
         questions = question_dict(TOPIC_1)
-    elif selection == 'B':
+    elif selection == "B":
         print('the romans')
         questions = question_dict(TOPIC_2)
-    get_questions(questions)
+    return questions
 
 
 # creates quiz
-def get_questions(questions):
+def display_questions(questions):
     """
     Loops through questions dictionary and displays the keys enumerated
     and the answers sorted randomly
@@ -81,7 +82,7 @@ def get_questions(questions):
         for label, option in random_label.items():
             print(f" {label}. {option}")
         while True:
-            choice = input('\nYour answer: ').upper()
+            choice = input("\nYour answer: ").upper()
             if validate_answer(choice):
                 break
         # add validation for choice, valid options a,b,c,d.
@@ -100,7 +101,7 @@ def check_answer(correct_answer, answer):
     if answer == correct_answer:
         print("That's right!")
         return 1
-    print(f"Sorry, the correct answer is {correct_answer}")
+    print(f"Sorry, the correct answer is: {correct_answer}")
     return 0
 
 
@@ -110,7 +111,7 @@ def show_score(score, num):
     """
     print(f"\nYou got {score} out of {num} questions")
     data = username, score
-    update_worksheet(data, 'leaderboard')
+    update_worksheet(data, "leaderboard")
 
 
 def update_worksheet(data, worksheet):
@@ -129,7 +130,7 @@ def display_leaderboard():
     """
     data = l_board.get_all_values()
     top_10 = sorted(data, key=lambda x: int(x[1]), reverse=True)
-    headers = ['Player', 'HighScore']
+    headers = ["Player", "HighScore"]
     board = tabulate(top_10[:10], headers, tablefmt="outline")
     print(game_art.LEADER_BOARD)
     print(f"{board}")
@@ -139,21 +140,31 @@ def replay():
     """
     Function to prompt user about their next action.
     """
+    choices = r"""
+Please choose an option:
+A. Check Leaderboard
+B. Play Again
+C. Quit
+"""
     while True:
-        user_choice = input("\nPlease choose an option:\nA. Check Leaderboard\nB. Play Again\nC. Quit\n").lower()
-        if user_choice == 'a':
+        print(choices)
+        user_choice = input().upper()
+        if user_choice == "A":
             display_leaderboard()
-        elif user_choice == "b":
+        elif user_choice == "B":
             choose_topic()
-        else:
+        elif user_choice == "B":
             return False
+        else:
+            print("The valid options are A,B,C,D, try again.")
 
 
 def main():
     """
     Runs the main program
     """
-    choose_topic()
+    questions = choose_topic()
+    display_questions(questions)
     replay()
     print('GoodBye')
 
