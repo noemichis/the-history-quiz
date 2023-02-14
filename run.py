@@ -19,6 +19,8 @@ SPREADSHEET = GSPREAD_CLIENT.open("the_history_quiz")
 
 TOPIC_1 = SPREADSHEET.worksheet("topic1")
 TOPIC_2 = SPREADSHEET.worksheet("topic2")
+TOPIC_3 = SPREADSHEET.worksheet("topic3")
+TOPIC_4 = SPREADSHEET.worksheet("topic4")
 l_board = SPREADSHEET.worksheet("leaderboard")
 
 
@@ -53,18 +55,31 @@ def choose_topic():
     Allows user to select the topic they wish to play
     """
     print("\nChoose a topic to start the game:")
+    topic = r"""
+A. The Vikings
+B. The Romans
+C. The Egyptians
+D. Ancient Greece
+"""
     while True:
-        selection = input("\nA. The Vikings\nB. The Romans\n").upper()
+        print(topic)
+        selection = input().upper()
         if validate_answer(selection):
             break
     print("Great! Let's begin.")
-    # separate to return_questions 
+    # separate to return_questions
     if selection == "A":
         print('the Vikings')
         questions = question_dict(TOPIC_1)
     elif selection == "B":
         print('the romans')
         questions = question_dict(TOPIC_2)
+    elif selection == "C":
+        questions = question_dict(TOPIC_3)
+        print('the egyptians')
+    else:
+        questions = question_dict(TOPIC_4)
+        print('the greek')
     return questions
 
 
@@ -152,9 +167,9 @@ C. Quit
         if user_choice == "A":
             display_leaderboard()
         elif user_choice == "B":
-            choose_topic()
-        elif user_choice == "B":
-            return False
+            main()
+        elif user_choice == "C":
+            exit("\nThank you for playing, see you next time!")
         else:
             print("The valid options are A,B,C,D, try again.")
 
@@ -166,7 +181,6 @@ def main():
     questions = choose_topic()
     display_questions(questions)
     replay()
-    print('GoodBye')
 
 
 if __name__ == '__main__':
