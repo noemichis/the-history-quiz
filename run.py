@@ -120,6 +120,21 @@ def check_answer(correct_answer, answer):
     return 0
 
 
+def check_wks(worksheet):
+    """
+    Opens worksheet and filters out exceptions
+    """
+    try:
+        SPREADSHEET.worksheet(worksheet)
+        return True
+    except (
+        gspread.exceptions.WorksheetNotFound,
+        gspread.exceptions.APIError
+    ):
+        print("An error occurred, we can not access the leaderboard")
+        return False
+
+
 def show_score(score, num):
     """
     Shows final score to the user
@@ -133,22 +148,24 @@ def update_worksheet(data, worksheet):
     """
     Push username and score to the leaderboard worksheet
     """
-    print(f"Updating {worksheet}...\n")
-    worksheet_to_update = SPREADSHEET.worksheet(worksheet)
-    worksheet_to_update.append_row(data)
-    print(f"{worksheet} updated successfully.\n")
+    if check_wks(worksheet):
+        print(f"Updating {worksheet}...\n")
+        # worksheet_to_update = SPREADSHEET.worksheet(worksheet)
+        l_board.append_row(data)
+        print(f"{worksheet} updated successfully.\n")
 
 
-def display_leaderboard():
+def display_leaderboard(worksheet):
     """
     Displays the top 10 from the leaderboard on choice of the user
     """
-    data = l_board.get_all_values()
-    top_10 = sorted(data, key=lambda x: int(x[1]), reverse=True)
-    headers = ["Player", "HighScore"]
-    board = tabulate(top_10[:10], headers, tablefmt="outline")
-    print(game_art.LEADER_BOARD)
-    print(f"{board}")
+    if check_wks(worksheet):
+        data = l_board.get_all_values()
+        top_10 = sorted(data, key=lambda x: int(x[1]), reverse=True)
+        headers = ["Player", "HighScore"]
+        board = tabulate(top_10[:10], headers, tablefmt="outline")
+        print(game_art.LEADER_BOARD)
+        print(f"{board}")
 
 
 def replay():
@@ -165,7 +182,7 @@ C. Quit
         print(choices)
         user_choice = input().upper()
         if user_choice == "A":
-            display_leaderboard()
+            display_leaderboard("leaderboard")
         elif user_choice == "B":
             main()
         elif user_choice == "C":
