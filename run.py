@@ -93,7 +93,8 @@ def display_questions(questions):
     for num, (prompt, option) in enumerate(questions.items(), start=1):
         print(f"\n{num}: {prompt}")
         correct_answer = option[0]
-        random_label = dict(zip(string.ascii_uppercase, random.sample(option, k=len(option))))
+        random_option = random.sample(option, k=len(option))
+        random_label = dict(zip(string.ascii_uppercase, random_option))
         for label, option in random_label.items():
             print(f" {label}. {option}")
         while True:
