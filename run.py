@@ -51,15 +51,9 @@ def choose_topic():
     """
     Allows user to select the topic they wish to play
     """
-    print("\nChoose a topic to start the game:")
-    topic = r"""
-A. The Vikings
-B. The Romans
-C. The Egyptians
-D. Ancient Greece
-"""
+    print("\nChoose your topic:")
     while True:
-        print(topic)
+        print(game_art.TOPIC_LIST)
         selection = input().upper()
         if validate_answer(selection):
             break
@@ -201,17 +195,18 @@ def main():
 
 if __name__ == '__main__':
     print(game_art.GAME_LOGO)
-    print("\nWelcome to The History Quiz")
-    print("\nPlease enter your name to start the game:")
+    print("\nPlease enter your name: ")
     while True:
-        username = input("\n").strip()
+        username = input().strip()
         if username == '':
             print("Username must not be empty")
         elif not len(username) > 2:
             print("Your username must contain at least 3 characters")
         else:
             break
-    print(f"\nHi {username}!\n")
+    print(f"\nWelcome, {username}!\n")
+    print(game_art.RULES)
+    input("Press any key to continue ")
 
     main()
 
