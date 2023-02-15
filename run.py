@@ -22,6 +22,7 @@ TOPIC_2 = SPREADSHEET.worksheet("topic2")
 TOPIC_3 = SPREADSHEET.worksheet("topic3")
 TOPIC_4 = SPREADSHEET.worksheet("topic4")
 l_board = SPREADSHEET.worksheet("leaderboard")
+Questions_per_quiz = 10
 
 
 def question_dict(selection):
@@ -84,8 +85,10 @@ def display_questions(questions):
     Loops through questions dictionary and displays the keys enumerated
     and the answers sorted randomly
     """
+    quest = random.sample(list(questions.items()), k=10)
+
     score = 0
-    for num, (prompt, option) in enumerate(questions.items(), start=1):
+    for num, (prompt, option) in enumerate(quest, start=1):
         print(f"\n{num}: {prompt}")
         correct_answer = option[0]
         random_option = random.sample(option, k=len(option))
