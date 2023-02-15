@@ -29,11 +29,7 @@ def question_dict(selection):
     Loops through values returned and create dictionary
     """
     topic = selection.get_all_values()
-    questions = {}
-    for select in topic:
-        question = select[0]
-        answers = select[1:]
-        questions[question] = answers
+    questions = {col[0]: col[1:] for col in topic}
     return questions
 
 
@@ -83,7 +79,6 @@ D. Ancient Greece
     return questions
 
 
-# creates quiz
 def display_questions(questions):
     """
     Loops through questions dictionary and displays the keys enumerated
