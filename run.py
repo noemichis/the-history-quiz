@@ -165,14 +165,8 @@ def replay():
     """
     Function to prompt user about their next action.
     """
-    choices = r"""
-Please choose an option:
-A. Check Leaderboard
-B. Play Again
-C. Quit
-"""
     while True:
-        print(choices)
+        print(game_art.CHOICES)
         user_choice = input().upper()
         if user_choice == "A":
             display_leaderboard("leaderboard")
@@ -209,19 +203,3 @@ if __name__ == '__main__':
     input("Press any key to continue ")
 
     main()
-
-
-# # question_num = 1
-# # for question in question_list:
-# #     print(question)
-# #     for answer in get_answers[question_num-1]:
-# #         print(answer)
-
-# #     question_num += 1
-
-# # try:
-# #     if len(username) > 2:
-# #         print(f"Hi {username}!")
-# #         break
-# # except TypeError:
-# # print("Your username must contain at least 3 characters")
