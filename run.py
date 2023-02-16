@@ -98,12 +98,10 @@ def display_questions(questions):
             choice = input("\nYour answer: ").upper()
             if validate_answer(choice):
                 break
-        # add validation for choice, valid options a,b,c,d.
-        # Possibly move to new game() function,
-        # keep get_questions separate.
         answer = random_label[choice]
         score += check_answer(correct_answer, answer)
     show_score(score, len(questions))
+    return score
 
 
 def check_answer(correct_answer, answer):
@@ -187,9 +185,10 @@ def main():
     """
     Runs the main program
     """
+    score = 0
     topic = choose_topic()
     questions = get_topic_wks(topic)
-    display_questions(questions)
+    score += display_questions(questions)
     replay()
 
 
