@@ -22,16 +22,19 @@ TOPIC_2 = SPREADSHEET.worksheet("topic2")
 TOPIC_3 = SPREADSHEET.worksheet("topic3")
 TOPIC_4 = SPREADSHEET.worksheet("topic4")
 l_board = SPREADSHEET.worksheet("leaderboard")
-Questions_per_quiz = 10
 
 
-def question_dict(selection):
+def choose_topic():
     """
-    Loops through values returned and create dictionary
+    Allows user to select the topic they wish to play
     """
-    topic = selection.get_all_values()
-    questions = {col[0]: col[1:] for col in topic}
-    return questions
+    print("\nChoose your topic:")
+    while True:
+        print(game_art.TOPIC_LIST)
+        selection = input().upper()
+        if validate_answer(selection):
+            break
+    return selection
 
 
 def validate_answer(values):
@@ -47,18 +50,11 @@ def validate_answer(values):
     return True
 
 
-def choose_topic():
+def get_topic_wks(selection):
     """
-    Allows user to select the topic they wish to play
+    Checks which letter was selected and opens the
+    corresponding worksheet to get the topic questions
     """
-    print("\nChoose your topic:")
-    while True:
-        print(game_art.TOPIC_LIST)
-        selection = input().upper()
-        if validate_answer(selection):
-            break
-    print("Great! Let's begin.")
-    # separate to return_questions
     if selection == "A":
         print('the Vikings')
         questions = question_dict(TOPIC_1)
@@ -71,6 +67,15 @@ def choose_topic():
     else:
         questions = question_dict(TOPIC_4)
         print('the greek')
+    return questions
+
+
+def question_dict(selection):
+    """
+    Loops through values returned and create dictionary
+    """
+    topic = selection.get_all_values()
+    questions = {col[0]: col[1:] for col in topic}
     return questions
 
 
@@ -182,7 +187,8 @@ def main():
     """
     Runs the main program
     """
-    questions = choose_topic()
+    topic = choose_topic()
+    questions = get_topic_wks(topic)
     display_questions(questions)
     replay()
 
