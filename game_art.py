@@ -1,4 +1,7 @@
-# print(art)
+"""
+This module contains decorative ASCII art and text to
+complement the game
+"""
 GAME_LOGO = r'''
     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
     |         _______ _            _    _ _     _                           |
