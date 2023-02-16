@@ -21,7 +21,7 @@ TOPIC_1 = SPREADSHEET.worksheet("topic1")
 TOPIC_2 = SPREADSHEET.worksheet("topic2")
 TOPIC_3 = SPREADSHEET.worksheet("topic3")
 TOPIC_4 = SPREADSHEET.worksheet("topic4")
-l_board = SPREADSHEET.worksheet("leaderboard")
+l_board = SPREADSHEET.worksheet("Leaderboard")
 
 
 def choose_topic():
@@ -116,6 +116,13 @@ def check_answer(correct_answer, answer):
     return 0
 
 
+def show_score(score, num):
+    """
+    Shows final score to the user
+    """
+    print(f"\nYou got {score} out of {num} questions")
+
+
 def check_wks(worksheet):
     """
     Opens worksheet and filters out exceptions
@@ -127,22 +134,13 @@ def check_wks(worksheet):
         gspread.exceptions.WorksheetNotFound,
         gspread.exceptions.APIError
     ):
-        print("An error occurred, we can not access the leaderboard")
+        print("An error occurred, we can not access the Leaderboard")
         return False
-
-
-def show_score(score, num):
-    """
-    Shows final score to the user
-    """
-    print(f"\nYou got {score} out of {num} questions")
-    data = username, score
-    update_worksheet(data, "leaderboard")
 
 
 def update_worksheet(data, worksheet):
     """
-    Push username and score to the leaderboard worksheet
+    Push username and score to the Leaderboard worksheet
     """
     if check_wks(worksheet):
         print(f"Updating {worksheet}...\n")
@@ -153,7 +151,7 @@ def update_worksheet(data, worksheet):
 
 def display_leaderboard(worksheet):
     """
-    Displays the top 10 from the leaderboard on choice of the user
+    Displays the top 10 from the Leaderboard on choice of the user
     """
     if check_wks(worksheet):
         data = l_board.get_all_values()
@@ -164,7 +162,7 @@ def display_leaderboard(worksheet):
         print(f"{board}")
 
 
-def replay():
+def replay(score):
     """
     Function to prompt user about their next action.
     """
@@ -172,13 +170,16 @@ def replay():
         print(game_art.CHOICES)
         user_choice = input().upper()
         if user_choice == "A":
-            display_leaderboard("leaderboard")
+            data = username, score
+            update_worksheet(data, "Leaderboard")
+            display_leaderboard("Leaderboard")
         elif user_choice == "B":
             main()
         elif user_choice == "C":
-            exit("\nThank you for playing, see you next time!")
+            print("\nThank you for playing, see you next time!")
+            return False
         else:
-            print("The valid options are A,B,C,D, try again.")
+            print("The valid options are A,B,C, try again.")
 
 
 def main():
@@ -189,7 +190,8 @@ def main():
     topic = choose_topic()
     questions = get_topic_wks(topic)
     score += display_questions(questions)
-    replay()
+    replay(score)
+    print('Goodbye')
 
 
 if __name__ == '__main__':
@@ -197,6 +199,7 @@ if __name__ == '__main__':
     print("\nPlease enter your name: ")
     while True:
         username = input().strip()
+        username = username.capitalize()
         if username == '':
             print("Username must not be empty")
         elif not len(username) > 2:
