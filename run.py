@@ -29,7 +29,7 @@ def choose_topic():
     """
     Allows user to select the topic they wish to play
     """
-    print("\nChoose your topic:")
+    print("\n Choose your topic:")
     while True:
         print(game_art.TOPIC_LIST)
         selection = input().upper()
@@ -46,7 +46,7 @@ def validate_answer(values):
     """
     if values not in ("A", "B", "C", "D"):
         print(
-            "The valid options are A,B,C,D, try again."
+            " The valid options are A,B,C,D, try again."
         )
         return False
     return True
@@ -112,9 +112,9 @@ def check_answer(correct_answer, answer):
     if it is returns 1.
     """
     if answer == correct_answer:
-        print("That's right!")
+        print(" That's right!")
         return 1
-    print(f"Sorry, the correct answer is: {correct_answer}")
+    print(f" Ooops, the correct answer is '{correct_answer}'")
     return 0
 
 
@@ -122,13 +122,15 @@ def show_score(score, num):
     """
     Shows final score to the user
     """
+    print(" ________________________________________________")
     text = f"{score} out of {num}"
     if score <= 3:
-        print(f"\nHmmm, {text}, better luck next time!")
+        print(f"\n   Hmmm, {text}, better luck next time!")
     elif score <= 7:
-        print(f"\nOh nice, {text}, that's a good start!")
+        print(f"\n   Oh nice, {text}, that's a good start!")
     else:
-        print(f"\nLook at that, {text}, you're rocking it!")
+        print(f"\n   Look at that, {text}, you're rocking it!")
+    print(" ________________________________________________")
 
 
 def check_wks(worksheet):
@@ -142,7 +144,7 @@ def check_wks(worksheet):
         gspread.exceptions.WorksheetNotFound,
         gspread.exceptions.APIError
     ):
-        print("An error occurred, we can not access the Leaderboard")
+        print(" An error occurred, we can not access the Leaderboard")
         return False
 
 
@@ -151,10 +153,9 @@ def update_worksheet(data, worksheet):
     Push username and score to the Leaderboard worksheet
     """
     if check_wks(worksheet):
-        print(f"Updating {worksheet}...\n")
-        # worksheet_to_update = SPREADSHEET.worksheet(worksheet)
+        print(f" Updating {worksheet}...\n")
         l_board.append_row(data)
-        print(f"{worksheet} updated successfully.\n")
+        print(f" {worksheet} updated successfully.\n")
 
 
 def display_leaderboard(worksheet):
@@ -185,10 +186,10 @@ def replay(score):
             os.system("clear")
             main()
         elif user_choice == "C":
-            print("\nThank you for playing, see you next time!")
+            print("\n Thank you for playing, see you next time!")
             return False
         else:
-            print("The valid options are A,B,C, try again.")
+            print(" The valid options are A,B,C, try again.")
 
 
 def main():
@@ -200,12 +201,12 @@ def main():
     questions = get_topic_wks(topic)
     score += display_questions(questions)
     replay(score)
-    print('Goodbye')
+    print(' Goodbye')
 
 
 if __name__ == '__main__':
     print(game_art.GAME_LOGO)
-    print("\nPlease enter your name: ")
+    print("\n Please enter your name: ")
     while True:
         username = input().strip()
         username = username.capitalize()
@@ -216,9 +217,9 @@ if __name__ == '__main__':
         else:
             break
     os.system("clear")
-    print(f"\nWelcome, {username}!\n")
+    print(f"\n Welcome, {username}!\n")
     print(game_art.RULES)
-    input("Press any key to continue ")
+    input(" Press any key to continue ")
     os.system("clear")
 
     main()
