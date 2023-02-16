@@ -4,6 +4,7 @@ import string
 import random
 from tabulate import tabulate
 import game_art
+import os
 
 
 SCOPE = [
@@ -34,6 +35,7 @@ def choose_topic():
         selection = input().upper()
         if validate_answer(selection):
             break
+    os.system("clear")
     return selection
 
 
@@ -120,13 +122,13 @@ def show_score(score, num):
     """
     Shows final score to the user
     """
-    print(f"\nThat's {score} out of {num}\n")
+    text = f"{score} out of {num}"
     if score <= 3:
-        print("Hmmm, better luck next time!")
+        print(f"\nHmmm, {text}, better luck next time!")
     elif score <= 7:
-        print("Oh nice, that's a start!")
+        print(f"\nOh nice, {text}, that's a good start!")
     else:
-        print("Look at you, rocking it!")
+        print(f"\nLook at that, {text}, you're rocking it!")
 
 
 def check_wks(worksheet):
@@ -180,6 +182,7 @@ def replay(score):
             update_worksheet(data, "Leaderboard")
             display_leaderboard("Leaderboard")
         elif user_choice == "B":
+            os.system("clear")
             main()
         elif user_choice == "C":
             print("\nThank you for playing, see you next time!")
@@ -212,8 +215,10 @@ if __name__ == '__main__':
             print("Your username must contain at least 3 characters")
         else:
             break
+    os.system("clear")
     print(f"\nWelcome, {username}!\n")
     print(game_art.RULES)
     input("Press any key to continue ")
+    os.system("clear")
 
     main()
