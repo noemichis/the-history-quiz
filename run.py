@@ -58,17 +58,17 @@ def get_topic_wks(selection):
     corresponding worksheet to get the topic questions
     """
     if selection == "A":
-        print('the Vikings')
+        print(game_art.VIKINGS)
         questions = question_dict(TOPIC_1)
     elif selection == "B":
-        print('the romans')
+        print(game_art.ROMANS)
         questions = question_dict(TOPIC_2)
     elif selection == "C":
         questions = question_dict(TOPIC_3)
-        print('the egyptians')
+        print(game_art.EGYPT)
     else:
         questions = question_dict(TOPIC_4)
-        print('the greek')
+        print(game_art.GREECE)
     return questions
 
 
