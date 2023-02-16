@@ -120,7 +120,13 @@ def show_score(score, num):
     """
     Shows final score to the user
     """
-    print(f"\nYou got {score} out of {num} questions")
+    print(f"\nThat's {score} out of {num}\n")
+    if score <= 3:
+        print("Hmmm, better luck next time!")
+    elif score <= 7:
+        print("Oh nice, that's a start!")
+    else:
+        print("Look at you, rocking it!")
 
 
 def check_wks(worksheet):
