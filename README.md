@@ -33,36 +33,36 @@ The History Quiz is a multi-topic, multi-choice quiz application built as Projec
 # Features
 
 ## Logo and username prompt 
-![Logo and prompt for username]()
+![Logo and prompt for username](assets/readme/logo_username.png)
 
-  - When the program is launched the logo is displayedd together with a prompt to input username
+  - When the program is launched the logo is displayed together with a prompt to input username
 
 ## Welcome and Quiz Rulez
-![Rules]()
+![Rules](assets/readme/welcome_rules.png)
 
   - Once the username is entered a welcome message is displayed with the instructions to play
   - The user is given time to read the instructions and once ready to start they can press any key
 
 ## Topic display
-![List of topics]()
+![List of topics](assets/readme/choose_topic.png)
 
   - The user has the option to choose from the topics listed, by entering A,B,C,D. Any other input will raise a retry message.
 
 ## Topic names
-![Vikings-text]()
+![Vikings-text](assets/readme/vikings.png)
 
-![Romans-text]()
+![Romans-text](assets/readme/romans.png)
 
-![Egypt-text]()
+![Egypt-text](assets/readme/egypt.png)
 
-![Greece-text]()
+![Greece-text](assets/readme/greece.png)
 
   - After the selection has been made, the quiz starts by displaying the topic name with ASCII art
 
 ## Questions and answers
   - Currently there are 10 questions for each topic
 
-![Question-answers]()
+![Question-answers](assets/readme/ABCD_only.png)
   - The question and answer pairs are randomized and labeled.
   - The questions and answers are being printed with typewriter effect
   - If the answer is not valid a retry message is shown
@@ -70,43 +70,43 @@ The History Quiz is a multi-topic, multi-choice quiz application built as Projec
 ## Answer feedback
   - Displays if correct:
 
-![Message if correct]()
+![Message if correct](assets/readme/correct.png)
 
   - Displays if incorrect:
 
-![Message if incorrect]()
+![Message if incorrect](assets/readme/incorrect.png)
 
 ## Result feedback
   - At the end of a quiz feedback is given according to how many questions the player gets correctly
   - Displays if less than 4 correct answers:
 
-![Message if less than 4 correct]()
+![Message if less than 4 correct](assets/readme/low.png)
 
   - Displays if less than 8 correct answers:
 
-![Message if less than 8 correct]()
+![Message if less than 8 correct](assets/readme/middle.png)
 
   - Displays if more 8 or more correct answers:
 
-![Message if 8 or more correct]()
+![Message if 8 or more correct](assets/readme/top.png)
 
 ## Menu
-![Menu options]()
+![Menu options](assets/readme/feedback_menu.png)
 
   - Choices after a game is finished
   - If the selection is not valid a retry message will be shown
 
 ## Leaderboard
-![Leaderboard]()
+![Leaderboard](assets/readme/leaderboard.png)
 
-  - If player decides to check the Leaderboard, their score will be pushed to Google Sheets then TOP 10 scores are displayed
+  - If player decides to check the Leaderboard, their score will be pushed to Google Sheets then TOP 10 scores are displayed(or as many as exist)
   - Menu options show again
 
 ## Play Again
-  - If the player decides to play again the game will restart from the topic display, allowing them to pick a new one
+  - If the player decides to play again, the terminal window is cleared and the topics are displayed, allowing to select a new one
 
 ## Quit
-![Quit game]()
+![Quit game](assets/readme/exit.png)
 
   - The game will end with a thank you message
 
