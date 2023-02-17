@@ -134,7 +134,7 @@ def show_score(score, num):
     """
     Shows final score to the user
     """
-    print("\n ________________________________________________")
+    print("\n __________________________________________________")
     text = f"{score} out of {num}"
     if score <= 3:
         typewriter(f"\n   Hmmm, {text}, better luck next time!")
@@ -142,7 +142,7 @@ def show_score(score, num):
         typewriter(f"\n   Oh nice, {text}, that's a good start!")
     else:
         typewriter(f"\n   Look at that, {text}, you're rocking it!")
-    print("\n ________________________________________________")
+    print("\n __________________________________________________")
 
 
 def check_wks(worksheet):
@@ -213,10 +213,10 @@ def main():
     questions = get_topic_wks(topic)
     score += display_questions(questions)
     replay(score)
-    print(' Goodbye')
 
 
 if __name__ == '__main__':
+    os.system("clear")
     print(game_art.GAME_LOGO)
     typewriter("\n Please enter your name: ")
     while True:
