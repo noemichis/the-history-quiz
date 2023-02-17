@@ -41,6 +41,36 @@ The topics are organized in separate worksheets, this way I can easily manage, u
 
 # Testing
 
+|Test | Completed |
+|:--- |   :---:   |
+|Logo displayed from game_art| Yes |
+|Player asked to enter username | Yes |
+|Username validation: input can not be empty and must contain minimum 3 characters | Yes |
+|Welcome message displayed with capitalized username | Yes |
+|Game rules displayed | Yes |
+|Topic choices displayed | Yes |  
+|Both uppercase and lowercase is accepted | Yes |
+|Topic name imported and displayed from game_art | Yes |
+|Questions/answers are displayed from correct topic | Yes |
+|Questions/answers labeled and randomized | Yes |
+|Topic/answer validation: input can only be A,B,C,D | Yes |
+|Question feedback if correct | Yes |
+|Question feedback if incorrect and show correct answer | Yes |
+|Display total score and message | Yes |
+|Display Menu | Yes |
+|Selection validation: input can only be A,B,C | Yes |
+|Select A: update and display leaderboard | Yes |
+|Sort Leaderboard to return Top 10 | Yes |
+|Select B: restart game and show topic choices | Yes |
+|Select C: exists program | Yes |
+|Typewriter effect | Yes |
+|Terminal cleared | Yes |
+
+
+
+
+
+
 # Technologies and resources
 
 ## Languages
