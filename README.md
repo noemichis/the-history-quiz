@@ -32,6 +32,86 @@ The History Quiz is a multi-topic, multi-choice quiz application built as Projec
 
 # Features
 
+## Logo and username prompt 
+![Logo and prompt for username]()
+
+  - When the program is launched the logo is displayedd together with a prompt to input username
+
+## Welcome and Quiz Rulez
+![Rules]()
+
+  - Once the username is entered a welcome message is displayed with the instructions to play
+  - The user is given time to read the instructions and once ready to start they can press any key
+
+## Topic display
+![List of topics]()
+
+  - The user has the option to choose from the topics listed, by entering A,B,C,D. Any other input will raise a retry message.
+
+## Topic names
+![Vikings-text]()
+
+![Romans-text]()
+
+![Egypt-text]()
+
+![Greece-text]()
+
+  - After the selection has been made, the quiz starts by displaying the topic name with ASCII art
+
+## Questions and answers
+  - Currently there are 10 questions for each topic
+
+![Question-answers]()
+  - The question and answer pairs are randomized and labeled.
+  - The questions and answers are being printed with typewriter effect
+  - If the answer is not valid a retry message is shown
+
+## Answer feedback
+  - Displays if correct:
+
+![Message if correct]()
+
+  - Displays if incorrect:
+
+![Message if incorrect]()
+
+## Result feedback
+  - At the end of a quiz feedback is given according to how many questions the player gets correctly
+  - Displays if less than 4 correct answers:
+
+![Message if less than 4 correct]()
+
+  - Displays if less than 8 correct answers:
+
+![Message if less than 8 correct]()
+
+  - Displays if more 8 or more correct answers:
+
+![Message if 8 or more correct]()
+
+## Menu
+![Menu options]()
+
+  - Choices after a game is finished
+  - If the selection is not valid a retry message will be shown
+
+## Leaderboard
+![Leaderboard]()
+
+  - If player decides to check the Leaderboard, their score will be pushed to Google Sheets then TOP 10 scores are displayed
+  - Menu options show again
+
+## Play Again
+  - If the player decides to play again the game will restart from the topic display, allowing them to pick a new one
+
+## Quit
+![Quit game]()
+
+  - The game will end with a thank you message
+
+
+
 ## Future Implementations
 
 # Storage
