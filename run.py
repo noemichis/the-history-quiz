@@ -1,10 +1,11 @@
+import os
+from time import sleep
+import random
+import string
+from tabulate import tabulate
 import gspread
 from google.oauth2.service_account import Credentials
-import string
-import random
-from tabulate import tabulate
 import game_art
-import os
 
 
 SCOPE = [
@@ -25,13 +26,24 @@ TOPIC_4 = SPREADSHEET.worksheet("topic4")
 l_board = SPREADSHEET.worksheet("Leaderboard")
 
 
+def typewriter(word, speed=0.03):
+    """
+    Typewriter function to be reused for certain prints
+    Code from:
+    https://stackoverflow.com/questions/20302331/typing-effect-in-python
+    """
+    for i in word:
+        print(i, end='', flush=True)
+        sleep(speed)
+
+
 def choose_topic():
     """
     Allows user to select the topic they wish to play
     """
-    print("\n Choose your topic:")
     while True:
         print(game_art.TOPIC_LIST)
+        typewriter("\n Choose your topic: ")
         selection = input().upper()
         if validate_answer(selection):
             break
@@ -90,12 +102,12 @@ def display_questions(questions):
 
     score = 0
     for num, (prompt, option) in enumerate(quest, start=1):
-        print(f"\n{num}: {prompt}")
+        typewriter(f"\n{num}: {prompt}\n")
         correct_answer = option[0]
         random_option = random.sample(option, k=len(option))
         random_label = dict(zip(string.ascii_uppercase, random_option))
         for label, option in random_label.items():
-            print(f" {label}. {option}")
+            typewriter(f" {label}. {option}\n")
         while True:
             choice = input("\nYour answer: ").upper()
             if validate_answer(choice):
@@ -112,9 +124,9 @@ def check_answer(correct_answer, answer):
     if it is returns 1.
     """
     if answer == correct_answer:
-        print(" That's right!")
+        typewriter(" That's right!\n")
         return 1
-    print(f" Ooops, the correct answer is '{correct_answer}'")
+    typewriter(f" Ooops, the correct answer is '{correct_answer}'\n")
     return 0
 
 
@@ -122,15 +134,15 @@ def show_score(score, num):
     """
     Shows final score to the user
     """
-    print(" ________________________________________________")
+    print("\n ________________________________________________")
     text = f"{score} out of {num}"
     if score <= 3:
-        print(f"\n   Hmmm, {text}, better luck next time!")
+        typewriter(f"\n   Hmmm, {text}, better luck next time!")
     elif score <= 7:
-        print(f"\n   Oh nice, {text}, that's a good start!")
+        typewriter(f"\n   Oh nice, {text}, that's a good start!")
     else:
-        print(f"\n   Look at that, {text}, you're rocking it!")
-    print(" ________________________________________________")
+        typewriter(f"\n   Look at that, {text}, you're rocking it!")
+    print("\n ________________________________________________")
 
 
 def check_wks(worksheet):
@@ -153,9 +165,9 @@ def update_worksheet(data, worksheet):
     Push username and score to the Leaderboard worksheet
     """
     if check_wks(worksheet):
-        print(f" Updating {worksheet}...\n")
+        typewriter(f"\n Updating {worksheet}...\n")
         l_board.append_row(data)
-        print(f" {worksheet} updated successfully.\n")
+        typewriter(f"\n {worksheet} updated successfully.\n")
 
 
 def display_leaderboard(worksheet):
@@ -186,8 +198,8 @@ def replay(score):
             os.system("clear")
             main()
         elif user_choice == "C":
-            print("\n Thank you for playing, see you next time!")
-            return False
+            typewriter("\n Thank you for playing, see you next time!\n")
+            quit()
         else:
             print(" The valid options are A,B,C, try again.")
 
@@ -206,7 +218,7 @@ def main():
 
 if __name__ == '__main__':
     print(game_art.GAME_LOGO)
-    print("\n Please enter your name: ")
+    typewriter("\n Please enter your name: ")
     while True:
         username = input().strip()
         username = username.capitalize()
@@ -217,9 +229,10 @@ if __name__ == '__main__':
         else:
             break
     os.system("clear")
-    print(f"\n Welcome, {username}!\n")
+    typewriter(f"\n Welcome, {username}!\n")
     print(game_art.RULES)
-    input(" Press any key to continue ")
+    typewriter(" Press any key to continue ")
+    input()
     os.system("clear")
 
     main()
