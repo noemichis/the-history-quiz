@@ -164,8 +164,7 @@ The topics are organized in separate worksheets, this way I can easily manage, u
 </details>
 <details>
 <summary>game_art.py</summary>
-<br>
-![Validation test for game_art.py]()
+<img src="assets/readme/game_art_lint.png" alt="Validation test for game_art.py"></img>
 </details>
 
 ### W3C Markup 
