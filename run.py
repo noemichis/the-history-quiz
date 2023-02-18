@@ -73,11 +73,11 @@ def get_topic_wks(selection):
     corresponding worksheet to get the topic questions
     """
     if selection == "A":
-        print(game_art.VIKINGS)
         questions = question_dict(TOPIC_1)
+        print(game_art.VIKINGS)
     elif selection == "B":
-        print(game_art.ROMANS)
         questions = question_dict(TOPIC_2)
+        print(game_art.ROMANS)
     elif selection == "C":
         questions = question_dict(TOPIC_3)
         print(game_art.EGYPT)
@@ -89,7 +89,7 @@ def get_topic_wks(selection):
 
 def question_dict(selection):
     """
-    Loops through values returned and create dictionary
+    Loops through values returned and creates dictionary
     """
     topic = selection.get_all_values()
     questions = {col[0]: col[1:] for col in topic}
@@ -101,10 +101,10 @@ def display_questions(questions):
     Loops through questions dictionary and displays the keys enumerated
     and the answers sorted randomly
     """
-    quest = random.sample(list(questions.items()), k=10)
+    random_quest = random.sample(list(questions.items()), k=10)
 
     score = 0
-    for num, (prompt, option) in enumerate(quest, start=1):
+    for num, (prompt, option) in enumerate(random_quest, start=1):
         typewriter(f"\n{num}: {prompt}\n")
         correct_answer = option[0]
         random_option = random.sample(option, k=len(option))
@@ -115,6 +115,7 @@ def display_questions(questions):
             choice = input("\nYour answer: ").upper()
             if validate_answer(choice):
                 break
+
         answer = random_label[choice]
         score += check_answer(correct_answer, answer)
     show_score(score, len(questions))
@@ -218,6 +219,7 @@ def main():
     replay(score)
 
 
+# Calls the main script once username has been selected
 if __name__ == '__main__':
     os.system("clear")
     print(game_art.GAME_LOGO)
