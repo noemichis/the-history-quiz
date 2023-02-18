@@ -35,13 +35,14 @@ RULES = r'''
     |                                                                       |
     |                          Q u i z  R u l e s                           |
     |                                                                       |
-    |    Put your history knowledge to test:                                |
-    |        - select a topic                                               |
-    |        - choose your answer from the options                          |
-    |        - you get 1 point for each correct answer                      |
-    |        - check if you made it to the top 10                           |
-    |        - play again and try a new topic                               |
-    |                     And most importantly, have fun!!! \(^o^)/         |
+    |    Go back in history and test your knowledge:                        |
+    |        - Select a topic                                               |
+    |        - Choose your answer from the options                          |
+    |        - You get 1 point for each correct answer                      |
+    |        - Check if you made it to the top 10                           |
+    |        - Play again and try a new topic                               |
+    |                                                                       |
+    |                     Most importantly, have fun!!! \(^o^)/             |
     |                                                                       |
     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 '''
