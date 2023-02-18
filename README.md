@@ -4,6 +4,7 @@
 
 The History Quiz is a multi-topic, multi-choice quiz application built as Project Portfolio 3 for Code Institute Full-stack development course. It is a Python terminal game that utilizes a collection of libraries to expand functionality and runs in the Code Institute mock terminal deployed on Heroku. The main inspiration was my deep interest for old civilizations, their life and their beliefs. Hence it targets anyone who shares similar interests and has a curiosity to test themselves. 
 
+![Site landing page](assets/readme/start.png)
 #### [**Live Website here**](https://the-history-quiz.herokuapp.com/)
 
 ## User Experience
@@ -24,6 +25,7 @@ The History Quiz is a multi-topic, multi-choice quiz application built as Projec
 - Usernames and score to be stored in Google Spreadsheets
 
 ## Design
+[ASCII art](https://en.wikipedia.org/wiki/ASCII_art) is used to give the application more character. The topic names were created with the help of [Patjork](https://patorjk.com/software/taag/#p=display&f=Graffiti&t=Type%20Something%20), text to ASCII art generator.
 
 ## Logic
 
@@ -111,8 +113,7 @@ The History Quiz is a multi-topic, multi-choice quiz application built as Projec
   - The game will end with a thank you message
 
 
-
-### Future Implementations
+## Future Implementations
 
 #### **Variety of topics and questions**
 In the future would be nice to add a variety of topics and increase the number of questions. As the questions will be always randomized, the users will enjoy a better selection and the game will be used more often.
@@ -154,6 +155,55 @@ The topics are organized in separate worksheets, this way I can easily manage, u
 |Terminal cleared | Yes |
 
 
+### CI Python Linter
+[CI Python Linter](https://pep8ci.herokuapp.com/) 
+<details>
+<summary>run.py</summary>
+<br>
+![Validation test for run.py]()
+</details>
+<details>
+<summary>game_art.py</summary>
+<br>
+![Validation test for game_art.py]()
+</details>
+
+### W3C Markup 
+[W3C Markup validator](https://validator.w3.org/)
+<details>
+<summary>HTML test</summary>
+<br>
+![Validation test for html]()
+</details>
+
+### W3C CSS 
+[W3C CSS Validator](https://jigsaw.w3.org/)
+<details>
+<summary>CSS test</summary>
+<br>
+![Validation test for css]()
+</details>
+
+## Bugs
+Along the development of this project I came across some small bugs, but most were resolved quickly with online searching. A good thing was also to have the built in Python linter. By the end of this project, this extension really helped me learn a cleaner way to organize code and what to watch out for. 
+
+### Fixed Bugs
+#### Score is sorted as string
+
+![Leaderboard displays number 10 at bottom](assets/readme/10_to_top.png)
+
+- This bug was resolved by converting the returned score values into integers. Once this addition was made the Leaderboard is sorted and displayed as intended.
+
+#### Line-too-long
+- These errors were mainly resolved by splitting up the code into multiple variables.
+### Unsolved
+I wanted to add a background for the application, but it did not work. I tried to follow a couple recommendations I found on Slack:
+  - using it's github url as a background property and as an embedded image
+  - host and image on [Imgur](https://imgur.com/), but I was not able to create an account.
+
+Since I was not able to resolve it I decided to remove the image for now and set a black background instead.   
+
+
 ## Technologies and resources
 
 ### Languages
@@ -187,6 +237,32 @@ Small intervention to the template with the help of
 
 ## Deployment
 
+The template used is the [Python Essentials Template](https://github.com/Code-Institute-Org/python-essentials-template) provided by [Code Institute](https://codeinstitute.net/).
+
+- New repository is created on Github from template.
+- New workspace is then created on Gitpod
+
+Custom modules are installed into application:
+- Use `pip3 install <module>`
+- Record all environmental requirements: `pip freeze3 > requirements. txt`
+
+### Deploy to Heroku
+- Create [Heroku](https://www.heroku.com/) account and log in
+- Select `New` and click `Create new app`
+- Choose **name**, **region** and `Create app`
+- Navigate to `Settings`, into `Config vars` and reveal
+- Enter Key: **PORT** Value: **8000**
+- Enter Key: **CREDS** Value: *credentials* (content of *creds.json* in our case).
+- Next got to `Buildpacks` and `Add Buildpack`
+- Add *Pyhton* first, then *NodeJs*
+- Navigate to `Deploy`  and choose *Github* as `Deployment method`
+- Once connected to *Github* in `App connected to GitHub` find your repo name
+- `Enable Automatic Deploys` if you want deploy new version after every push
+- `Manual Deploys` if you want to control all deployments
+- `View` link will be provided to navigate to the deployed page
+
+
+
 ## Credits & References
 I researched many sites for better understanding of *Python*. I overall learned much, the ones below I used the most:
 - [Python](https://www.python.org/) 
@@ -201,9 +277,10 @@ I researched many sites for better understanding of *Python*. I overall learned 
 - [GeeksforGeeks](https://www.geeksforgeeks.org/)
     - [Clearing screen](https://www.geeksforgeeks.org/clear-screen-python/)
     - [ASCII Uppercase](https://www.geeksforgeeks.org/python-string-ascii_uppercase/) - inspiration for labeling answers        
-- [Code Institute Program](https://codeinstitute.net/)
 - [Docs Gspread](https://docs.gspread.org/en/v5.7.0/) - understand how to use **gspread** and learn more about error handling
 - [W3Schools](https://www.w3schools.com)
+- [Love Sandwiches](https://github.com/Code-Institute-Solutions/love-sandwiches-p5-sourcecode/tree/master/05-deployment/01-deployment-part-1) - great walkthrough project with lot to absorb
+
 
 The questions for the quiz were created with the help of [Duckster](https://www.ducksters.com/), a platform which contains several facts on all kinds of different topics.
 
