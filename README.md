@@ -42,7 +42,7 @@ The History Quiz is a multi-topic, multi-choice quiz application built as Projec
 ### Username validation
 ![Username validation](assets/readme/username_valid.png)
 
-- The user name must consist of a minimum of 3 characters and must not be empty. If it doesn't meet the criteria an retry message will be shown.   
+- The username must consist of a minimum of 3 characters and must not be empty. If it doesn't meet the criteria an retry message will be shown.   
 
 ### Welcome and Quiz Rulez
 ![Rules](assets/readme/welcome_rules.png)
@@ -255,7 +255,7 @@ Custom modules are installed into application:
 - Record all environmental requirements: `pip freeze3 > requirements. txt`
 
 ### Deploy to Heroku
-- Create [Heroku](https://www.heroku.com/) account and log in
+- Create Heroku account and log in
 - Select `New` and click `Create new app`
 - Choose **name**, **region** and `Create app`
 - Navigate to `Settings`, into `Config vars` and reveal
