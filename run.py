@@ -14,11 +14,13 @@ SCOPE = [
     "https://www.googleapis.com/auth/drive"
     ]
 
+# Variables to easier access Google Sheets
 CREDS = Credentials.from_service_account_file("creds.json")
 SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SPREADSHEET = GSPREAD_CLIENT.open("the_history_quiz")
 
+# Worksheets saved as variables
 TOPIC_1 = SPREADSHEET.worksheet("topic1")
 TOPIC_2 = SPREADSHEET.worksheet("topic2")
 TOPIC_3 = SPREADSHEET.worksheet("topic3")
@@ -54,12 +56,13 @@ def choose_topic():
 def validate_answer(values):
     """
     Validates users answer input and returns
-    error if not in A, B, C, D
+    error message if not in A, B, C, D
     """
-    if values not in ("A", "B", "C", "D"):
-        print(
-            " The valid options are A,B,C,D, try again."
-        )
+    try:
+        if values not in ("A", "B", "C", "D"):
+            raise ValueError("The valid options are A,B,C,D, try again.")
+    except ValueError as exc:
+        print(f"\n {exc}")
         return False
     return True
 
