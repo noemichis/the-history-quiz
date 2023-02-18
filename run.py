@@ -31,6 +31,7 @@ l_board = SPREADSHEET.worksheet("Leaderboard")
 os.system("clear")
 print(game_art.GAME_LOGO)
 
+
 def typewriter(word, speed=0.03):
     """
     Typewriter function to be reused for certain prints
