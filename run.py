@@ -27,6 +27,9 @@ TOPIC_3 = SPREADSHEET.worksheet("topic3")
 TOPIC_4 = SPREADSHEET.worksheet("topic4")
 l_board = SPREADSHEET.worksheet("Leaderboard")
 
+# The terminal is cleared and the Logo is displayed on page load
+os.system("clear")
+print(game_art.GAME_LOGO)
 
 def typewriter(word, speed=0.03):
     """
@@ -221,8 +224,6 @@ def main():
 
 # Calls the main script once username has been selected
 if __name__ == '__main__':
-    os.system("clear")
-    print(game_art.GAME_LOGO)
     typewriter("\n Please enter your name: ")
     while True:
         username = input().strip()
